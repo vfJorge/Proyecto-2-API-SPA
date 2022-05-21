@@ -1,0 +1,23 @@
+#mainBody{
+  background-image: linear-gradient(rgb(53, 174, 230),rgb(22, 82, 131));
+  height: fit-content;
+}
+
+#JaimitoVar{
+  height:80% ;
+  width:80% ;
+}
+
+.nav-link{
+  color: white;
+}
+
+div button:hover{
+  background-color: white;
+  color: black;
+  height: 66px;
+}
+
+a:link{
+  text-decoration: aqua;
+}

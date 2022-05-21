@@ -1,0 +1,31 @@
+#main-div{
+  background-color: white;
+  padding: 0.5%;
+
+}
+
+#inner-div{
+  background-color: rgba(247, 244, 244, 0.945);
+  background-blend-mode:color-dodge;
+  background-size: cover;
+  height: 100vh;
+  width: auto;
+  position: relative;
+  text-align: center;
+}
+
+#inner-div > h2{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+/* #JaimitoMenu{
+  margin-top: 100px;
+  height: 86px;
+  width: 274px;
+} */
+

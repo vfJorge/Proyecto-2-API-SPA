@@ -1,0 +1,32 @@
+<div class="container">
+  <br>
+    <div class="row">
+      <h3 class="text-center">Tienda en línea</h3>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <input type="text" class="form-control" [(ngModel)]="filteredString"/>
+      </div>
+    </div>
+<br><br>
+      <div class="row">
+        <div class="col-sm-2" *ngFor="let Articulos of ArticulosRecibidos  | filterCatalogo:filteredString | paginate: { itemsPerPage: 18, currentPage: page }">
+            <div class="card">
+              <img src= {{Articulos.img}}>
+              <div class="card-body">
+                <h5 class="card-title text-center">{{Articulos.name}}</h5>
+                <h6 class="card-title text-center">${{Articulos.price}}</h6>
+                <div class="text-center">
+                  <button type="button" class="btn btn-success"><img id="comprarIcon" src="../../assets/cart.svg" width="22" height="22"> Comprar</button>
+                </div>
+                <p class="card-title text-center">Stock: {{Articulos.stockQty}}</p>
+              </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <pagination-controls (pageChange)="page = $event" previousLabel="Anterior"
+      nextLabel="Siguiente" class="text-center" ></pagination-controls>
+</div>
+  

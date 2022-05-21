@@ -1,0 +1,50 @@
+<div class="container">
+    <br>
+      <div class="row">
+        <h3 class="text-center">Top 100 Mangas</h3>
+      </div>
+      <small id="emailHelp" class="form-text text-muted text-center"><a (click)="showModal()">Click aquí si no puedes ver los mangas</a></small>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <input type="text" class="form-control" [(ngModel)]="filteredString"/>
+        </div>
+      </div>
+  <br><br>
+        <div class="row">
+          <div class="col-sm-2" *ngFor="let Manga of MangasRecibidos  | filterManga:filteredString | paginate: { itemsPerPage: 18, currentPage: page }">
+              <div class="card">
+                <img src= {{Manga.node.main_picture.medium}}>
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{Manga.node.title}}</h5>
+                </div>
+            </div>
+            <br>
+          </div>
+        </div>
+        <pagination-controls (pageChange)="page = $event" previousLabel="Anterior"
+        nextLabel="Siguiente" class="text-center" ></pagination-controls>
+        
+        <nz-modal
+        [(nzVisible)]="isVisible"
+        [nzTitle]="modalTitle"
+        [nzContent]="modalContent"
+        [nzFooter]="modalFooter"
+        (nzOnCancel)="closeModal()"
+      >
+        <ng-template #modalTitle>Información</ng-template>
+
+        <ng-template #modalContent>
+          <p>La API que utiliza este catálogo no permite la conexión de orígenes cruzados
+            por ello, tendrás que entrar al siguiente enlace y darle al botón "Request temporary access to the demo server"
+          para permitir que cargue este catálogo. (Esto permite que se cree un servidor demo que hace posible la conexión
+          de orígenes cruzados mediante el API y esta página)</p>
+          <div class="text-center">
+            <a href="https://cors-anywhere.herokuapp.com/" target="_blank" class="btn btn-primary">Click aquí para ser enviado a la página</a>
+          </div>
+        </ng-template>
+        <ng-template #modalFooter>
+        </ng-template>
+      </nz-modal>
+  </div>
+    
