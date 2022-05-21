@@ -12,6 +12,11 @@ class ArticuloController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('api', ['except' => ['index']]);
+    }
+
     public function index()
     {
         $articulos = Articulo::all();
