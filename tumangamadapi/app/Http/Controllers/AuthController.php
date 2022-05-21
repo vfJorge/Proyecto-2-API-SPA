@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','register','index','logout']]);
     }
 
     /**
@@ -33,8 +33,9 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        return $this->respondWithToken($token);
+        //$user = User::findOrFail($credentials);
+        //$obj = ,'1'=>auth()->user()->type);
+        return $this->respondWithToken($token);//->access_token;//$this->respondWithToken($token);//,
     }
 
     /**
@@ -46,19 +47,12 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
-
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout()
+    public function type()
     {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['type' => auth()->user()->type]);
     }
-
+    
+   
     /**
      * Refresh a token.
      *
@@ -85,6 +79,13 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request){
         $validator=Validator::make($request->all(),[
             'name'=>'required',
