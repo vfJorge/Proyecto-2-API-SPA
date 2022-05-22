@@ -1,8 +1,21 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+<form nz-form [formGroup] = "validateForm" (ngSubmit)="submitForm(validateForm.value)">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="¡El email proporcionado no es válido!">
       <input nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="6"
+      [nzXs]="24"
+      nzFor="nickname"
+      nzRequired
+    >
+      <span>Usuario</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="¡Introduce tu nombre de usuario!">
+      <input nz-input id="nickname" formControlName="name" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -27,20 +40,6 @@
           ¡Las contraseñas no coinciden!
         </ng-container>
       </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label
-      [nzSm]="6"
-      [nzXs]="24"
-      nzFor="nickname"
-      nzRequired
-      nzTooltipTitle="¿Cómo quieres que te llamen los demás?"
-    >
-      <span>Usuario</span>
-    </nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="¡Introduce tu nombre de usuario!">
-      <input nz-input id="nickname" formControlName="nickname" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item nz-row class="register-area">

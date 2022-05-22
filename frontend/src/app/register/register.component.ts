@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginRegisterService } from '../services/login-register.service';
 
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
@@ -16,18 +17,24 @@ export class RegisterComponent implements OnInit {
     theme: 'twotone'
   };
 
+  constructor(private fb: FormBuilder, private LoginRegisterService: LoginRegisterService) { }
+
+
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]]
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      checkPassword: new FormControl('', [Validators.required, this.confirmationValidator]),
     });
   }
 
-  submitForm(): void {
+  submitForm(cuenta: any): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      this.LoginRegisterService.postCrearCuenta(cuenta).subscribe((resp: any) => {
+        if(resp.message == '¡Usuario registrado exitosamente!')
+        alert("Te has registrado exitosamente");
+      })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -55,9 +62,6 @@ export class RegisterComponent implements OnInit {
   getCaptcha(e: MouseEvent): void {
     e.preventDefault();
   }
-
-
-  constructor(private fb: FormBuilder) { }
 
 
 

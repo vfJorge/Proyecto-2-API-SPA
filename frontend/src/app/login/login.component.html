@@ -1,10 +1,10 @@
 
 <div class="container" >
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup] = "validateForm" class="login-form" (ngSubmit)="submitForm(validateForm.value)">
     <nz-form-item>
-      <nz-form-control nzErrorTip="¡Introduce tu nombre de usuario, por favor!">
+      <nz-form-control nzErrorTip="¡Introduce tu correo electrónico, por favor!">
         <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="userName" placeholder="Nombre de usuario" />
+          <input type="email" nz-input formControlName="email" placeholder="Correo electrónico" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -15,11 +15,6 @@
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
-    <div nz-row class="login-form-margin">
-      <div nz-col [nzSpan]="19">
-        <a class="login-form-forgot text-center">Olvidé mi contraseña</a>
-      </div>
-    </div>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Ingresar</button>
   </form>
 </div>
