@@ -33,10 +33,10 @@ export class CarritoService {
     this.listaArticulos.next(this.cartListaArticulos);
   }
 
-  obtenerPrecioTotal(cantidadArt: any) : number{
+  obtenerPrecioTotal() : number{
     let total = 0;
     this.cartListaArticulos.map((articulo:any) => {
-      total += articulo.price * cantidadArt;
+      total += articulo.price * articulo.qty;
     })
     
     return total;
@@ -44,7 +44,7 @@ export class CarritoService {
 
   borrarArticuloDeLista(articulo: any) {
     this.cartListaArticulos.map((a: any, index: any) => {
-      if (articulo.id === a.id) {
+      if (articulo === a.id) {
         this.cartListaArticulos.splice(index, 1);
       }
     })
@@ -58,28 +58,18 @@ export class CarritoService {
   }
 
   verificarSiExiste(articulo: any) {
-
     let esIgual = false;
-    let articuloEncontrado: any;
 
     this.cartListaArticulos.map((a: any) => {
-      if (a.id === articulo.id) {
-        articuloEncontrado = a;
+      if (a.id === articulo) {
         esIgual = true;
-      }
+      } 
     })
 
-
-    if (esIgual) {
-      let index = this.cartListaArticulos.indexOf(articuloEncontrado);
-      if (articuloEncontrado.cantidad === 10) {
-        this.createNotification('warning', "Cantidad máxima alcanzada", "Has alcanzado el máximo de compras por articulo (10). Revisa tu carrito!")
-      } else {
-        this.cartListaArticulos[index].cantidad += 1;
-      }
-    } else {
+    if(!esIgual) {
       this.agregarAlCarro(articulo);
     }
+
 
     this.obtenerCantidadArticulos();
     localStorage.setItem('carrito', JSON.stringify(this.cartListaArticulos));
@@ -87,17 +77,17 @@ export class CarritoService {
 
 
   obtenerCantidadArticulos() {
-    let cantidad = 0;
+    let qty = 0;
     this.cartListaArticulos.map((a: any) => {
-      cantidad += a.cantidad;
+      qty += a.qty;
     })  
 
-    this.cuentaArticulos.next(cantidad);
+    this.cuentaArticulos.next(qty);
     localStorage.setItem('carrito', JSON.stringify(this.cartListaArticulos));
   }
 
   realizarPago() {
-    this.createNotification('success', "Compra exitosa", `Tu compra se ha realizado correctamente por un total de $${this.obtenerPrecioTotal(0)}` )
+    this.createNotification('success', "Compra exitosa", `Tu compra se ha realizado correctamente por un total de $${this.obtenerPrecioTotal()}` )
     this.eliminarTodo();
     this.obtenerCantidadArticulos();
     localStorage.setItem('carrito', JSON.stringify(this.cartListaArticulos));

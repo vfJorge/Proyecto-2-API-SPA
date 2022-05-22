@@ -53,6 +53,7 @@ class ArticuloController extends Controller
     public function show(Request $request)
     {
         $articulo = Articulo::findOrFail($request->id);
+        $articulo->qty=1;
         return $articulo;
     }
 

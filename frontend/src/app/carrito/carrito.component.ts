@@ -10,8 +10,8 @@ export class CarritoComponent implements OnInit {
   public pagina: number;
   public Articulos: any;
   public cantidadArticulos: number = 1;
-  public cantidadArticulosAux: number = 1;
   public cantidadesDeArticulos: any = [];
+  public cantidadStock = Array;
 
   constructor(private CarritoService: CarritoService) { }
 
@@ -22,22 +22,13 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  resetCantidadArt(){
-    this.cantidadArticulos = this.cantidadArticulosAux;
+  obtenerCantidad(tag: HTMLSelectElement, articulo: any) {
+    articulo.qty = +tag.value;
+    this.CarritoService.obtenerCantidadArticulos();
   }
 
-  incrementarCantidad(cantidadStock: any){
-    if(this.cantidadArticulos < cantidadStock)
-    this.cantidadArticulos++;
-  }
-
-  decrementarCantidad(){
-    if(this.cantidadArticulos > 1)
-    this.cantidadArticulos--;
-  }
-
-  eliminarArticuloDelCarro(articulo: any) {
-    this.CarritoService.borrarArticuloDeLista(articulo);
+  eliminarArticuloDelCarro(idArticulo: any) {
+    this.CarritoService.borrarArticuloDeLista(idArticulo);
     this.CarritoService.obtenerCantidadArticulos();
   }
 
@@ -50,8 +41,8 @@ export class CarritoComponent implements OnInit {
     this.CarritoService.obtenerCantidadArticulos();
   }
 
-  valorTotalCompra(cantArt: any): number {
-    return this.CarritoService.obtenerPrecioTotal(cantArt);
+  valorTotalCompra(): number {
+    return this.CarritoService.obtenerPrecioTotal();
   }
 
 

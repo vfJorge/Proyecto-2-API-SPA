@@ -15,17 +15,12 @@
             <td>{{articulo.name}}</td>
             <td>{{articulo.price}}</td>
             <td>
-              <div>
-                <button (click)="decrementarCantidad()">
-                  -
-                </button>
-                {{cantidadArticulos}}
-                <button (click)="incrementarCantidad(articulo.stockQty)">
-                  +
-                </button>
-              </div>
+              <select  id="cantidad"  (change)="obtenerCantidad($any($event.target), $any(articulo))">
+                <option selected disabled hidden> {{ articulo.qty }}</option>
+                <option *ngFor="let index of cantidadStock(articulo.stockQty); let i = index" [value]="i+1">{{i+1}}</option>
+                </select>
             </td>
-            <td>{{articulo.price * cantidadArticulos}}</td>
+            <td>{{articulo.price * articulo.qty}}</td>
             <td><button class="btn btn-secondary" (click)="eliminarArticuloDelCarro(articulo.id)"><img src="../../assets/trash.png"></button></td>
           </tr>
         </tbody>
@@ -34,7 +29,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="subtotal">Subtotal: ${{valorTotalCompra(cantidadArticulos)}}</td>
+            <td class="subtotal">Subtotal: ${{valorTotalCompra()}}</td>
           </tr>
           <tr>
             <td></td>
