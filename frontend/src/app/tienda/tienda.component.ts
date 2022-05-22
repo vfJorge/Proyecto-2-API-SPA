@@ -3,6 +3,7 @@ import { CatalogoService } from '../services/catalogo.service';
 import { HttpClient } from '@angular/common/http';
 import { NzModalFooterComponent, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
+import { CarritoService } from '../services/carrito.service';
 
 @Component({
   selector: 'app-tienda',
@@ -18,12 +19,17 @@ export class TiendaComponent implements OnInit {
   isConfirmLoading = false;
 
 
-  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService, router: Router){
+  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService, router: Router,private CarritoService: CarritoService){
     this.CatalogoService.getCatalogo().subscribe((resp: any) => {
     this.ArticulosRecibidos = resp;
   })
   }
+
   ngOnInit(): void {
+  }
+
+  agregarAlCarro(articuloID: any) {
+    this.CarritoService.verificarSiExiste(articuloID);
   }
 
   showModal(): void {

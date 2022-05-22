@@ -11,18 +11,16 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
+     /**
+     * Define el metodo de autenticacion de los EndPoints.
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register','index','logout']]);
+        $this->middleware('auth:api', ['except' => ['login','register','logout']]);
     }
 
     /**
-     * Get a JWT via given credentials.
+     * Comprueba las credenciales de acceso, si son correctas devuelve un access-token (JWT).
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -33,13 +31,11 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        //$user = User::findOrFail($credentials);
-        //$obj = ,'1'=>auth()->user()->type);
-        return $this->respondWithToken($token);//->access_token;//$this->respondWithToken($token);//,
+        return $this->respondWithToken($token);
     }
 
     /**
-     * Get the authenticated User.
+     * Muestra los datos del usuario.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -47,6 +43,12 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
+
+    /**
+     * Muestra el tipo de usuario.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function type()
     {
         return response()->json(['type' => auth()->user()->type]);
@@ -54,7 +56,7 @@ class AuthController extends Controller
     
    
     /**
-     * Refresh a token.
+     * Refresca el access token y lo devuelve.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -64,7 +66,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the token array structure.
+     * Estructura el json de respuesta del access token.
      *
      * @param  string $token
      *
@@ -80,10 +82,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the token array structure.
+     * Registra un usuario en la bd, captura nombre de usuario,email y contraseña.
      *
-     * @param  string $token
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request){

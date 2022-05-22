@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'api4', component:Api4Component},
   {path: 'api5', component:Api5Component},
   {path: 'tienda', component:TiendaComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'crud-catalogo', component:CrudCatalogoComponent},
   {path: 'carrito', component:CarritoComponent},

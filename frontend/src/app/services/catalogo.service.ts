@@ -16,6 +16,14 @@ export class CatalogoService {
     })
   }
 
+  getArticulo(id: any){
+    var _url = 'http://localhost:8000/api/articulos/'+id;
+    let header= new HttpHeaders().set('Content-Type', 'application/json')
+    return this.http.get(_url, {
+      headers: header
+    })
+  }
+
   postAgregarProducto(producto: any){
     var _url = 'http://localhost:8000/api/articulos';
     var bearerToken = ''

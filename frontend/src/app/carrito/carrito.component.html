@@ -10,27 +10,23 @@
             <th>Total</th>
           </tr>
         </thead>
-        <tbody *ngFor="let articulo of articulos | paginate: {itemsPerPage: 10, currentPage: pagina}">
+        <tbody *ngFor="let articulo of Articulos">
           <tr>
-            <td>Articulo</td>
-            <td>Precio</td>
+            <td>{{articulo.name}}</td>
+            <td>{{articulo.price}}</td>
             <td>
-              <select id="cantidad" (change)="getCantidad($any($event.target), $any(articulo))">
-              <option selected disabled hidden>articulo cantidad</option>
-              <option [value]="1">1</option>
-              <option [value]="2">2</option>
-              <option [value]="3">3</option>
-              <option [value]="4">4</option>
-              <option [value]="5">5</option>
-              <option [value]="6">6</option>
-              <option [value]="7">7</option>
-              <option [value]="8">8</option>
-              <option [value]="9">9</option>
-              <option [value]="10">10</option>
-            </select>
+              <div>
+                <button (click)="decrementarCantidad()">
+                  -
+                </button>
+                {{cantidadArticulos}}
+                <button (click)="incrementarCantidad(articulo.stockQty)">
+                  +
+                </button>
+              </div>
             </td>
-            <td>Total</td>
-            <td><button class="btn btn-secondary"><img src="../../assets/trash.png"></button></td>
+            <td>{{articulo.price * cantidadArticulos}}</td>
+            <td><button class="btn btn-secondary" (click)="eliminarArticuloDelCarro(articulo.id)"><img src="../../assets/trash.png"></button></td>
           </tr>
         </tbody>
         <tfoot>
@@ -38,14 +34,14 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="subtotal">Subtotal: ${{ valorTotalCompra()}}</td>
+            <td class="subtotal">Subtotal: ${{valorTotalCompra(cantidadArticulos)}}</td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td><button class="btn btn-danger">Vaciar carrito</button></td>
-            <td><button class="btn btn-success">Realizar compra </button></td>
+            <td><button class="btn btn-danger" (click)="vaciarCarro()">Vaciar carrito</button></td>
+            <td><button class="btn btn-success" (click)="realizarPago()">Realizar compra </button></td>
           </tr>
         </tfoot>
       </table>

@@ -17,16 +17,16 @@
     </div>
 <br><br>
       <div class="row">
-        <div class="col-sm-2" *ngFor="let Articulos of ArticulosRecibidos  | filterCatalogo:filteredString | paginate: { itemsPerPage: 18, currentPage: page }">
+        <div class="col-sm-2" *ngFor="let Articulo of ArticulosRecibidos  | filterCatalogo:filteredString | paginate: { itemsPerPage: 18, currentPage: page }">
             <div class="card">
-              <img src= {{Articulos.img}}>
+              <img src= {{Articulo.img}}>
               <div class="card-body">
-                <h5 class="card-title text-center">{{Articulos.name}}</h5>
-                <h6 class="card-title text-center">${{Articulos.price}}</h6>
+                <h5 class="card-title text-center">{{Articulo.name}}</h5>
+                <h6 class="card-title text-center">${{Articulo.price}}</h6>
                 <div class="text-center">
-                  <button type="button" class="btn btn-success"><img id="comprarIcon" src="../../assets/cart.svg" width="22" height="22"> Añadir a Carrito </button>
+                  <button type="button" class="btn btn-success" (click)="agregarAlCarro(Articulo.id)"><img id="comprarIcon" src="../../assets/cart.svg" width="22" height="22"> Añadir a Carrito </button>
                 </div>
-                <p class="card-title text-center">Stock: {{Articulos.stockQty}}</p>
+                <p class="card-title text-center">Stock: {{Articulo.stockQty}}</p>
               </div>
           </div>
           <br>

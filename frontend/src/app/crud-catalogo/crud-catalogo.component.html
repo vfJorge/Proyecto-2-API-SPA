@@ -24,17 +24,17 @@
 					</tr>
 				</thead>
                     <tbody>
-                        <tr class="text-center" *ngFor="let Articulos of ArticulosRecibidos">
-                            <td>{{Articulos.id}}</td>
-                            <td>{{Articulos.type}}</td>
-                            <td>{{Articulos.name}}</td>
-                            <td>{{Articulos.img}}</td>
-                            <td>{{Articulos.price}}</td>
-                            <td>{{Articulos.stockQty}}</td>
+                        <tr class="text-center" *ngFor="let Articulo of ArticulosRecibidos">
+                            <td>{{Articulo.id}}</td>
+                            <td>{{Articulo.type}}</td>
+                            <td>{{Articulo.name}}</td>
+                            <td>{{Articulo.img}}</td>
+                            <td>{{Articulo.price}}</td>
+                            <td>{{Articulo.stockQty}}</td>
                             <td>
                                 <a data-toggle="modal" data-target="#editEmployeeModal"><img src="../../assets/edit.png"></a>
                                 &nbsp;
-                                <a (click)="eliminarProducto(Articulos.id)"><img src="../../assets/trash.png"></a>
+                                <a (click)="eliminarProducto(Articulo.id)"><img src="../../assets/trash.png"></a>
                             </td>
                         </tr>
                     </tbody>

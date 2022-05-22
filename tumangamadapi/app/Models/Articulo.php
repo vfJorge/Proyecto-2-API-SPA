@@ -10,6 +10,11 @@ class Articulo extends Model implements JWTSubject
     use HasFactory;
     protected $filable = ['type','name','img','price','stockQty'];
 
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
     public function getJWTIdentifier()
     {
         return $this->getKey();

@@ -33,6 +33,7 @@ import { TiendaComponent } from './tienda/tienda.component';
 import { FilterCatalogoPipe } from './Pipes/filter-catalogo.pipe';
 import { CrudCatalogoComponent } from './crud-catalogo/crud-catalogo.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 registerLocaleData(en);
 
@@ -67,6 +68,7 @@ registerLocaleData(en);
     NzButtonModule,
     NzModalModule,
     NgxPaginationModule,
+    NzNotificationModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
