@@ -19,3 +19,14 @@ p{
   opacity: 50%;
   font-size: 12px;
 }
+
+#modalTitle{
+  background-color: black;
+}
+#titleDiv{
+  background-image: linear-gradient(rgb(53, 174, 230),rgb(22, 82, 131));
+  border-radius: 5px;
+  margin: 0%;
+  padding: 10px;
+  color: white;
+}
