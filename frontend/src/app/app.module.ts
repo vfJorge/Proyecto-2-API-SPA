@@ -32,6 +32,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { TiendaComponent } from './tienda/tienda.component';
 import { FilterCatalogoPipe } from './Pipes/filter-catalogo.pipe';
 import { CrudCatalogoComponent } from './crud-catalogo/crud-catalogo.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 registerLocaleData(en);
 
@@ -51,6 +52,7 @@ registerLocaleData(en);
     TiendaComponent,
     FilterCatalogoPipe,
     CrudCatalogoComponent,
+    CarritoComponent,
   ],
   imports: [
     BrowserModule,
