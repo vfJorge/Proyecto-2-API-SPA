@@ -12,4 +12,7 @@ export class CarritoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  carritoVacio(){
+
+  }
 }
