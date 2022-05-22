@@ -85,11 +85,11 @@ class ArticuloController extends Controller
     {
         $articulo = Articulo::findOrFail($request->id);
 
-        $articulo->type = $request-> type;
-        $articulo->name = $request-> name;
-        $articulo->img = $request-> img;
-        $articulo->price = $request-> price;
-        $articulo->stockQty = $request-> stockQty;
+        if($request->has('type'))$articulo->type = $request-> type; 
+        if($request->has('name'))$articulo->name = $request-> name;
+        if($request->has('img'))$articulo->img = $request-> img;
+        if($request->has('price'))$articulo->price = $request-> price;
+        if($request->has('stockQty'))$articulo->stockQty = $request-> stockQty;
 
         $articulo->save();
         return $articulo;

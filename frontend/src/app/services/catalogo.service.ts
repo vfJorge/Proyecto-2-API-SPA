@@ -7,7 +7,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class CatalogoService {
 
   constructor(private http: HttpClient) { }
-  
 
   getCatalogo(){
     var _url = 'http://localhost:8000/api/articulos';
@@ -17,10 +16,30 @@ export class CatalogoService {
     })
   }
 
+  postAgregarProducto(producto: any){
+    var _url = 'http://localhost:8000/api/articulos';
+    var bearerToken = ''
+    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
+    return this.http.post(_url, {
+      headers: header
+    }, producto)
+  }
+
   delEliminarProducto(id: any){
     var _url = 'http://localhost:8000/api/articulos/'+id;
     var bearerToken = ''
     let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
-    return this.http.delete(_url)
+    return this.http.delete(_url, {
+      headers: header
+    })
+  }
+
+  putAgregarProducto(producto: any, id: any){
+    var _url = 'http://localhost:8000/api/articulos/'+id;
+    var bearerToken = ''
+    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
+    return this.http.put(_url, {
+      headers: header
+    }, producto)
   }
 }

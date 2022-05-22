@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogoService } from '../services/catalogo.service';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NzModalFooterComponent, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
@@ -12,16 +13,30 @@ export class CrudCatalogoComponent implements OnInit {
 
   public page: number = 1;
   public ArticulosRecibidos: Array<any> = [];
+  datosProducto!: FormGroup;
+  idProd: any;
   
   public isVisible = false;
   isConfirmLoading = false;
 
-  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService){
+  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService, private fb: FormBuilder){
     this.CatalogoService.getCatalogo().subscribe((resp: any) => {
     this.ArticulosRecibidos = resp;
   })
   }
+
   ngOnInit(): void {
+    this.datosProducto = this.fb.group({
+      id: new FormControl('', [Validators.required]),
+      type: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      img: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required]),
+      stockQty: new FormControl('', [Validators.required])
+    })
+  }
+
+  enviarID(idArticulo: any){
   }
 
   eliminarProducto(idProducto: any){
@@ -31,7 +46,20 @@ export class CrudCatalogoComponent implements OnInit {
     })
   }
 
+  agregarProducto(datosProducto: any){
+    this.CatalogoService.postAgregarProducto(datosProducto).subscribe((resp: any) => {
+      alert("El producto se ha añadido con éxito");
+      window.location.reload();
+    })
+  }
   
+  editarProducto(datosProducto: any, id: any){
+    this.CatalogoService.putAgregarProducto(datosProducto, id).subscribe((resp: any) => {
+      alert("El producto se ha editado con éxito");
+      window.location.reload();
+    })
+  }
+
   showModal(): void {
     this.isVisible = true;
   }
