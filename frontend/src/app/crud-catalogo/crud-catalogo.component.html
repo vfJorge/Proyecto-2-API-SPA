@@ -32,7 +32,7 @@
                             <td>{{Articulos.price}}</td>
                             <td>{{Articulos.stockQty}}</td>
                             <td>
-                                <a data-toggle="modal" data-target="#editEmployeeModal" (click)="enviarID(Articulos.id)"><img src="../../assets/edit.png"></a>
+                                <a data-toggle="modal" data-target="#editEmployeeModal"><img src="../../assets/edit.png"></a>
                                 &nbsp;
                                 <a (click)="eliminarProducto(Articulos.id)"><img src="../../assets/trash.png"></a>
                             </td>
@@ -96,11 +96,11 @@
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form [formGroup] = "datosProducto" (ngSubmit)="editarProducto(datosProducto.value, idProd)">
+			<form [formGroup] = "datosProducto" (ngSubmit)="editarProducto(datosProducto.value)">
 				<div class="modal-body">
 					<div class="form-group">
 						<label><b>ID del producto a editar:</b></label>
-						<input type="number" class="form-control" min="1" formControlName="id">
+						<input type="number" class="form-control" min="1" id="idArticulo">
 					</div>					
 					<div class="form-group">
 						<label><b>Tipo de producto:</b></label> &nbsp;
@@ -130,7 +130,7 @@
 				</div>
 				<div class="modal-footer">
 					<input type="reset" class="btn btn-default" value="Limpiar campos">
-					<input type="submit" class="btn btn-success" value="Añadir producto" [disabled]="!datosProducto.valid">
+					<input type="submit" class="btn btn-success" value="Editar producto" [disabled]="!datosProducto.valid">
 				</div>
 			</form>
 		</div>

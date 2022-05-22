@@ -27,16 +27,12 @@ export class CrudCatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.datosProducto = this.fb.group({
-      id: new FormControl('', [Validators.required]),
       type: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       img: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
       stockQty: new FormControl('', [Validators.required])
     })
-  }
-
-  enviarID(idArticulo: any){
   }
 
   eliminarProducto(idProducto: any){
@@ -53,8 +49,9 @@ export class CrudCatalogoComponent implements OnInit {
     })
   }
   
-  editarProducto(datosProducto: any, id: any){
-    this.CatalogoService.putAgregarProducto(datosProducto, id).subscribe((resp: any) => {
+  editarProducto(datosProducto: any){
+    const idArt = document.getElementById('idArticulo') as HTMLInputElement | null;
+    this.CatalogoService.putAgregarProducto(datosProducto, idArt).subscribe((resp: any) => {
       alert("El producto se ha editado con éxito");
       window.location.reload();
     })

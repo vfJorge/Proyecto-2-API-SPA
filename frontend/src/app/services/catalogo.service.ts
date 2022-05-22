@@ -20,9 +20,9 @@ export class CatalogoService {
     var _url = 'http://localhost:8000/api/articulos';
     var bearerToken = ''
     let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
-    return this.http.post(_url, {
+    return this.http.post(_url, producto, {
       headers: header
-    }, producto)
+    })
   }
 
   delEliminarProducto(id: any){
@@ -38,8 +38,8 @@ export class CatalogoService {
     var _url = 'http://localhost:8000/api/articulos/'+id;
     var bearerToken = ''
     let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
-    return this.http.put(_url, {
+    return this.http.put(_url, producto, {
       headers: header
-    }, producto)
+    })
   }
 }
