@@ -22,10 +22,12 @@ export class Api5Component implements OnInit {
     })
   }
 
-  sendCorreo(datosEmail: any){
+  sendCorreo(datosEmail: any): boolean{
     this.enviaremailService.postEnviarEmail(datosEmail).subscribe((resp: any) => {
       alert("El correo se ha enviado con éxito");
+      return true;
     })
+    return false;
   }
 
 

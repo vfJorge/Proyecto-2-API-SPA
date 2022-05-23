@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  submitForm(cuenta: any): void {
+  submitForm(cuenta: any): boolean {
     if (this.validateForm.valid) {
       this.LoginRegisterService.postCrearCuenta(cuenta).subscribe((resp: any) => {
         if(resp.message == '¡Usuario registrado exitosamente!')
@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
         this.LoginRegisterService.postIniciarSesion(cuenta).subscribe((resp: any) => {
           this.LoginRegisterService.guardarToken(resp.access_token);
           window.location.reload();
+          return true;
         })
       })
       
@@ -48,6 +49,7 @@ export class RegisterComponent implements OnInit {
         }
       });
     }
+    return false;
   }
 
   updateConfirmValidator(): void {

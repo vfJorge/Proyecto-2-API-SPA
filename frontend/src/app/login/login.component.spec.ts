@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
+import { LoginRegisterService } from '../services/login-register.service';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -8,7 +14,14 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      imports: [ 
+        RouterTestingModule, 
+        HttpClientModule ,
+        FormsModule, 
+        ReactiveFormsModule,
+      ],
+      declarations: [ LoginComponent ],
+      providers: [ LoginRegisterService ]
     })
     .compileComponents();
   });
@@ -20,14 +33,8 @@ describe('LoginComponent', () => {
   });
 
   it('has logged in', () => {
-    (<HTMLInputElement>document.getElementById('email')).value = "softwareenunclic@gmail.com";
-    (<HTMLInputElement>document.getElementById('password')).value = "123";
-    expect(component.submitForm).toEqual(true);
+    component.validateForm.controls['email'].setValue('tilin@gmail.com');
+    component.validateForm.controls['password'].setValue('etesech');
+    expect(component.submitForm(component.validateForm)).toBeTrue();
   });
-
-  it('hasnt logged in', () => {
-    (<HTMLInputElement>document.getElementById('email')).value = "ed_leo1411@gmail.com";
-    (<HTMLInputElement>document.getElementById('password')).value = "ednover123";
-    expect(component.submitForm).toEqual(false);
-  })
 });
