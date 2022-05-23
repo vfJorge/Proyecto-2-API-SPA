@@ -90,18 +90,22 @@ export class CrudCatalogoComponent implements OnInit {
     })
   }
 
-  eliminarProducto(idProducto: any){
+  eliminarProducto(idProducto: any): boolean{
     this.CatalogoService.delEliminarProducto(idProducto).subscribe((resp: any) => {
       alert("El producto se ha eliminado con éxito");
       window.location.reload();
+      return true;
     })
+    return false;
   }
 
-  agregarProducto(datosProductoAgregar: any){
+  agregarProducto(datosProductoAgregar: any): boolean{
     this.CatalogoService.postAgregarProducto(datosProductoAgregar).subscribe((resp: any) => {
       alert("El producto se ha añadido con éxito");
       window.location.reload();
+      return true;
     })
+    return false;
   }
   
   editProductoVista(idArti: any, tipo: any, nombre: any, imgURL: any, precio: any, stockCanti: any){
@@ -113,12 +117,14 @@ export class CrudCatalogoComponent implements OnInit {
     this.datosProducto.controls['stockQty'].setValue(stockCanti);
   }
 
-  editarProducto(datosProducto: any){
+  editarProducto(datosProducto: any): boolean{
     const idArti = document.getElementById('idArticulo') as HTMLInputElement;
     this.CatalogoService.putAgregarProducto(datosProducto, idArti.value).subscribe((resp: any) => {
       alert("El producto se ha editado con éxito");
       window.location.reload();
+      return true;
     })
+    return false;
   }
 
   generarDescargarExcel(): void{

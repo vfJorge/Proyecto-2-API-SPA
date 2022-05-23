@@ -22,10 +22,12 @@ export class Api1Component implements OnInit {
     })
   }
 
-  sendEmail(emailResp: string){
+  sendEmail(emailResp: string): boolean{
     this.validaremailService.getValidateEmail(emailResp).subscribe((resp: any) => {
       this.validacionEmail=resp
+      return false;
     })
+    return true;
   }
 
 

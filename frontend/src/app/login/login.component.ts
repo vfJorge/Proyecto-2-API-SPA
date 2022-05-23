@@ -22,15 +22,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  submitForm(cuenta: any): void {
+  submitForm(cuenta: any): boolean {
     if (this.validateForm.valid) {
       this.LoginRegisterService.postIniciarSesion(cuenta).subscribe((resp: any) => {
         alert("Has iniciado sesión exitosamente");
         this.LoginRegisterService.guardarToken(resp.access_token);
         window.location.reload();
+        return true;
       }, error => {
         console.log(error);
         alert("Credenciales inválidas, intentalo de nuevo");
+        return false;
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -40,5 +42,6 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+    return false;
   }
 }

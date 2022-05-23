@@ -35,12 +35,15 @@ export class TiendaComponent implements OnInit {
     this.CarritoService.verificarSiExiste(articuloID);
   }
 
-  verificarTipoCliente(){
+  verificarTipoCliente(): boolean{
     this.loginRegisterService.getTipoCliente().subscribe((resp:any)=>{
       if(resp.type == 'admin'){
         document.getElementById("crudButton").setAttribute("style","visibility: visible");
+        return true;
       }
+      return false;
     })
+    return false;
   }
 
   showModal(): void {
