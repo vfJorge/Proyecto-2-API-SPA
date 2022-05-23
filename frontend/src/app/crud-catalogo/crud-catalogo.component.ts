@@ -10,7 +10,7 @@ import { NzModalFooterComponent, NzModalRef, NzModalService } from 'ng-zorro-ant
   styleUrls: ['./crud-catalogo.component.css']
 })
 export class CrudCatalogoComponent implements OnInit {
-
+  filteredString: string = '';
   public page: number = 1;
   public ArticulosRecibidos: Array<any> = [];
   datosProducto!: FormGroup;

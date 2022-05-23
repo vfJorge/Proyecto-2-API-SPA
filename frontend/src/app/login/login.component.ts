@@ -26,7 +26,11 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       this.LoginRegisterService.postIniciarSesion(cuenta).subscribe((resp: any) => {
         alert("Has iniciado sesión exitosamente");
-        console.log(resp);
+        this.LoginRegisterService.guardarToken(resp.access_token);
+        window.location.reload();
+      }, error => {
+        console.log(error);
+        alert("Contraseña o correo incorrecto, intentalo de nuevo");
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CatalogoService } from '../services/catalogo.service';
 import { HttpClient } from '@angular/common/http';
 import { NzModalFooterComponent, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
+import { CatalogoService } from '../services/catalogo.service';
 import { CarritoService } from '../services/carrito.service';
+import { LoginRegisterService } from '../services/login-register.service';
 
 @Component({
   selector: 'app-tienda',
@@ -19,17 +20,27 @@ export class TiendaComponent implements OnInit {
   isConfirmLoading = false;
 
 
-  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService, router: Router,private CarritoService: CarritoService){
+  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService, router: Router,
+    private CarritoService: CarritoService, private loginRegisterService: LoginRegisterService){
     this.CatalogoService.getCatalogo().subscribe((resp: any) => {
     this.ArticulosRecibidos = resp;
   })
   }
 
   ngOnInit(): void {
+    this.verificarTipoCliente();
   }
 
   agregarAlCarro(articuloID: any) {
     this.CarritoService.verificarSiExiste(articuloID);
+  }
+
+  verificarTipoCliente(){
+    this.loginRegisterService.getTipoCliente().subscribe((resp:any)=>{
+      if(resp.type == 'admin'){
+        document.getElementById("crudButton").setAttribute("style","visibility: visible");
+      }
+    })
   }
 
   showModal(): void {

@@ -8,7 +8,7 @@ import { CarritoService } from '../services/carrito.service';
 })
 export class CarritoComponent implements OnInit {
   public pagina: number;
-  public Articulos: any;
+  public Articulos: any = [];
   public cantidadArticulos: number = 1;
   public cantidadesDeArticulos: any = [];
   public cantidadStock = Array;

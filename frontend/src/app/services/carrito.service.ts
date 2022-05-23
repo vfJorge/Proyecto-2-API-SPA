@@ -63,13 +63,12 @@ export class CarritoService {
     this.cartListaArticulos.map((a: any) => {
       if (a.id === articulo) {
         esIgual = true;
-      } 
+      }
     })
 
     if(!esIgual) {
       this.agregarAlCarro(articulo);
     }
-
 
     this.obtenerCantidadArticulos();
     localStorage.setItem('carrito', JSON.stringify(this.cartListaArticulos));

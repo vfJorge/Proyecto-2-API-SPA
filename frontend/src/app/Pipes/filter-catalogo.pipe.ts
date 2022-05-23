@@ -15,7 +15,11 @@ export class FilterCatalogoPipe implements PipeTransform {
       if(Articulo.name.toLowerCase().indexOf(filterString.toLowerCase()) > -1 || Articulo.name.toLowerCase() === filterString.toLowerCase()){
         ArticulosRecibidos.push(Articulo)
       }
-    }
+
+        if(Articulo.type.toLowerCase() === (filterString.toLowerCase())){
+          ArticulosRecibidos.push(Articulo)
+        }
+      }
     return ArticulosRecibidos;
   }
 

@@ -12,7 +12,7 @@ class ArticuloController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('api', ['except' => ['index']]);
+        $this->middleware('auth:api', ['except' => ['index']]);
     }
     /**
      * Despliega todos los articulos de la bd.

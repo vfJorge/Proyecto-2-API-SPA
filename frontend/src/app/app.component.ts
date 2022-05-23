@@ -16,8 +16,25 @@ export class AppComponent {
 
   public isVisible = false;
   isConfirmLoading = false;
+  isLogged = localStorage.getItem('bearerToken');
 
   constructor( router: Router, private modalService: NzModalService){
+  }
+
+  ngOnInit(){
+    if(this.isLogged != ''){
+      document.getElementById("loginButton").setAttribute("style","visibility: hidden;");
+      document.getElementById("logoutButton").setAttribute("style","visibility: visible");
+    }
+    else{
+      document.getElementById("loginButton").setAttribute("style","visibility: visible;");
+      document.getElementById("logoutButton").setAttribute("style","visibility: hidden");
+    }
+  }
+
+  cerrarSesion(){
+    localStorage.setItem('bearerToken','');
+    window.location.reload();
   }
 
   showModal(): void {

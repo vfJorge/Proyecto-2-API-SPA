@@ -5,6 +5,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CatalogoService {
+  public bearer = localStorage.getItem('bearerToken');
 
   constructor(private http: HttpClient) { }
 
@@ -26,8 +27,7 @@ export class CatalogoService {
 
   postAgregarProducto(producto: any){
     var _url = 'http://localhost:8000/api/articulos';
-    var bearerToken = ''
-    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
+    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+this.bearer)
     return this.http.post(_url, producto, {
       headers: header
     })
@@ -35,8 +35,7 @@ export class CatalogoService {
 
   delEliminarProducto(id: any){
     var _url = 'http://localhost:8000/api/articulos/'+id;
-    var bearerToken = ''
-    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
+    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+this.bearer)
     return this.http.delete(_url, {
       headers: header
     })
@@ -44,8 +43,7 @@ export class CatalogoService {
 
   putAgregarProducto(producto: any, id: any){
     var _url = 'http://localhost:8000/api/articulos/'+id;
-    var bearerToken = ''
-    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+bearerToken)
+    let header= new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer '+this.bearer)
     return this.http.put(_url, producto, {
       headers: header
     })
