@@ -1,0 +1,28 @@
+<div class="container" id="inner-div">
+  <br><br>
+  <div class="row text-center">
+    <h3>Valida tu email</h3>
+  </div>
+  <br>
+  <form [formGroup] = "mail" (ngSubmit)="sendEmail(emailInput.value)">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <label for="Email">Correo electrónico</label>
+          <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="Tu correo electrónico" formControlName="correoEmail" #emailInput>
+          <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo electrónico</small>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+    <div class="col text-center">
+      <button type="submit" class="btn btn-primary " [disabled]="!mail.valid">Validar correo</button>
+    </div>
+  </form>
+  
+  <br><br>
+
+    <p *ngIf="validacionEmail.disposable==true" class="text-center alert alert-danger">El email no es válido</p>
+    <p *ngIf="validacionEmail.disposable==false" class="text-center alert alert-primary">El email es válido</p>
+</div>

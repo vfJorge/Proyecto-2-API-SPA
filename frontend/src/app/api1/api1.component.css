@@ -1,0 +1,9 @@
+#inner-div{
+    background-color: rgba(247, 244, 244, 0.945);
+    background-blend-mode:color-dodge;
+    background-size: cover;
+    height: 100vh;
+    width: auto;
+    position: relative;
+  }
+  

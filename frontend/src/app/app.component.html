@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body id="mainBody" >
+  <div class="container">
+    <nav class="navbar navbar-expand navbar-dark bg-dark rounded-top">
+      <div class="container-fluid">
+        <div class="col-2">
+          <a class="navbar-brand" routerLink="/menu"><img src="./assets/Logo2.png" alt="" id="JaimitoVar"></a>
+        </div>
+        <div class="col">
+          <button class="nav-link btn btn-primary btn-block btn-dark" routerLink="/api2">Cómics</button>
+        </div>
+        <div class="col">
+          <button class="nav-link btn btn-primary btn-block btn-dark " routerLink="/api3">Top Mangas</button>
+        </div>
+        <div class="col">
+          <button class="nav-link btn btn-primary btn-block btn-dark" routerLink="/api4">Top Animes</button>
+        </div>
+        <div class="col">
+          <button class="nav-link btn btn-primary btn-block btn-dark" routerLink="/api1">Valida tu email</button>
+        </div>
+        <div class="col">
+          <button class="nav-link btn btn-primary btn-block btn-dark" routerLink="/api5">Enviar Comentario</button>
+        </div>
+        <div class="col">
+          <button class="nav-link btn btn-primary btn-block btn-dark" routerLink="/tienda">Tienda en línea</button>
+        </div>
+        <div class="col">
+          <button class="nav-link btn btn-primary btn-block btn-dark" id="loginButton" (click)="showModal()">Login</button>
+          <button class="nav-link btn btn-primary btn-block btn-dark" id="logoutButton" (click)="cerrarSesion()">Logout</button>
+        </div>
+      </div>
+    </nav>
+    <nz-modal
+        [(nzVisible)]="isVisible"
+        [nzTitle]="modalTitle"
+        [nzContent]="modalContent"
+        [nzFooter]="modalFooter"
+        (nzOnCancel)="closeModal()"
+      >
+        <ng-template #modalTitle>Login</ng-template>
+
+        <ng-template #modalContent>
+          <app-login></app-login>
+          <p class="text-center alert alert-primary">¡O <a (click)="openRegisterModal()" class="">regístrate ahora!</a></p>
+        </ng-template>
+
+        <ng-template #modalFooter>
+        </ng-template>
+      </nz-modal>
+    <router-outlet></router-outlet>
+  </div>
+</body>
+</html>

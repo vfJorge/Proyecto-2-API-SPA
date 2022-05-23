@@ -1,0 +1,28 @@
+<div class="container">
+  <br>
+    <div class="row">
+      <h3 class="text-center">Cómics</h3>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <input type="text" placeholder="Buscar (Nombre, formato, superhéroe del comic)" class="form-control" [(ngModel)]="filteredString"/>
+      </div>
+    </div>
+<br><br>
+      <div class="row">
+        <div class="col-sm-2" *ngFor="let Comic of ComicsRecibidos | filter:filteredString | paginate: { itemsPerPage: 18, currentPage: page }">
+            <div class="card">
+              <img src= {{Comic.thumbnail.path}}{{ImagenesComics}}>
+              <div class="card-body" id="cardInfo">
+                <h5 class="card-title text-center">{{Comic.title}}</h5>
+              </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <pagination-controls (pageChange)="page = $event" previousLabel="Anterior"
+      nextLabel="Siguiente" class="text-center"></pagination-controls>
+</div>
+  
+  

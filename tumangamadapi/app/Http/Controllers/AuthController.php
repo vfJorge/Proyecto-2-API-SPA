@@ -11,18 +11,16 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
+     /**
+     * Define el metodo de autenticacion de los EndPoints.
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','register','logout']]);
     }
 
     /**
-     * Get a JWT via given credentials.
+     * Comprueba las credenciales de acceso, si son correctas devuelve un access-token (JWT).
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -33,12 +31,11 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
         return $this->respondWithToken($token);
     }
 
     /**
-     * Get the authenticated User.
+     * Muestra los datos del usuario.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -48,19 +45,18 @@ class AuthController extends Controller
     }
 
     /**
-     * Log the user out (Invalidate the token).
+     * Muestra el tipo de usuario.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function type()
     {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['type' => auth()->user()->type]);
     }
-
+    
+   
     /**
-     * Refresh a token.
+     * Refresca el access token y lo devuelve.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -70,7 +66,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the token array structure.
+     * Estructura el json de respuesta del access token.
      *
      * @param  string $token
      *
@@ -85,11 +81,17 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Registra un usuario en la bd, captura nombre de usuario,email y contraseña.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request){
         $validator=Validator::make($request->all(),[
             'name'=>'required',
             'email'=>'required|string|email|max:100|unique:users',
-            'password'=>'required|string|min:6', //|confirmed
+            'password'=>'required|string', //|confirmed
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(),400);
