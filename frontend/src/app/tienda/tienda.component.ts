@@ -22,13 +22,13 @@ export class TiendaComponent implements OnInit {
 
   constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService, router: Router,
     private CarritoService: CarritoService, private loginRegisterService: LoginRegisterService){
+    this.verificarTipoCliente();
     this.CatalogoService.getCatalogo().subscribe((resp: any) => {
     this.ArticulosRecibidos = resp;
   })
   }
 
   ngOnInit(): void {
-    this.verificarTipoCliente();
   }
 
   agregarAlCarro(articuloID: any) {

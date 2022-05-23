@@ -34,6 +34,7 @@ export class AppComponent {
 
   cerrarSesion(){
     localStorage.setItem('bearerToken','');
+    localStorage.setItem('compra','');
     window.location.reload();
   }
 

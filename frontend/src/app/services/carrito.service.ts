@@ -29,6 +29,7 @@ export class CarritoService {
   agregarAlCarro(articulo: any) {
     this.CatalogoService.getArticulo(articulo).subscribe((resp: any) => {
       this.cartListaArticulos.push(resp);
+      localStorage.setItem('carrito', JSON.stringify(this.cartListaArticulos));
     })
     this.listaArticulos.next(this.cartListaArticulos);
   }
@@ -86,7 +87,8 @@ export class CarritoService {
   }
 
   realizarPago() {
-    this.createNotification('success', "Compra exitosa", `Tu compra se ha realizado correctamente por un total de $${this.obtenerPrecioTotal()}` )
+    this.createNotification('success', "Compra exitosa", `Tu compra se ha realizado correctamente por un total de $${this.obtenerPrecioTotal()}`);
+    localStorage.setItem('compra', JSON.stringify(this.cartListaArticulos));
     this.eliminarTodo();
     this.obtenerCantidadArticulos();
     localStorage.setItem('carrito', JSON.stringify(this.cartListaArticulos));
@@ -108,5 +110,14 @@ export class CarritoService {
       titulo,
       mensaje
       );
+  }
+
+  obtenerPrecioTotalPago() : number{
+    let total = 0;
+    JSON.parse(localStorage['compra']).map((articulo:any) => {
+      total += articulo.price * articulo.qty;
+    })
+    
+    return total;
   }
 }

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogoService } from '../services/catalogo.service';
+import { LoginRegisterService } from '../services/login-register.service';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NzModalFooterComponent, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import html2canvas from 'html2canvas'; // @ts-ignore
-import jsPDF from 'jspdf'; 
+import jsPDF from 'jspdf';// @ts-ignore
+import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-crud-catalogo',
@@ -22,8 +25,10 @@ export class CrudCatalogoComponent implements OnInit {
   public isVisible = false;
   isConfirmLoading = false;
 
-  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService, private fb: FormBuilder){
-    this.CatalogoService.getCatalogo().subscribe((resp: any) => {
+  constructor(private CatalogoService: CatalogoService, private http: HttpClient, private modalService: NzModalService,
+    private fb: FormBuilder, private loginRegisterService:LoginRegisterService, private route: Router){
+      this.verificarCredencial();
+      this.CatalogoService.getCatalogo().subscribe((resp: any) => {
     this.ArticulosRecibidos = resp;
   })
   }
@@ -47,27 +52,42 @@ export class CrudCatalogoComponent implements OnInit {
     })
   }
 
-  downloadPDF() {
-    const DATA = document.getElementById('htmlData');
-    const doc = new jsPDF('p', 'pt', 'a4');
-    const options = {
-      background: 'white',
-      scale: 3
-    };
-    html2canvas(DATA, options).then((canvas) => {
+  verificarCredencial(){
+    this.loginRegisterService.getTipoCliente().subscribe((resp:any)=>{
+      if(resp.type == 'client'){
+        this.route.navigate(['/menu']);
+      }
+    }, error=>{
+      this.route.navigate(['/menu']);
+    })
+  }
 
-      const img = canvas.toDataURL('image/PNG');
+  generarDescargarPDF() {
+    this.CatalogoService.getCatalogo().subscribe({next: (resp:any) => {
+        let doc = new jsPDF();
+        let col = ["ID", "Tipo de producto", "Nombre","Precio","Stock"]
+        let rows : any = [];
 
-      const bufferX = 15;
-      const bufferY = 15;
-      const imgProps = (doc as any).getImageProperties(img);
-      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
-      return doc;
-    }).then((docResult) => {
-      docResult.save('TMNGMNDP_inventario_pagina_'+this.page+'.pdf');
-    });
+        let texto = "Inventario de Artículos de Tumangamandapio";
+        let fecha = new Date();
+        texto += '\t' + "Fecha: " + fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+        texto += '\n';
+        texto += '\n'; 
+        doc.text(texto, 20, 10);
+
+        resp.forEach((articulo: any) => {
+          let temp = [articulo.id, articulo.type, articulo.name,"$" + articulo.price, articulo.stockQty];
+          rows.push(temp);
+        });
+
+        autoTable(doc, {head: [col], body: rows})
+        
+        doc.save("Reporte-Inventario-"+fecha.getDate() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getFullYear());
+      },
+      error: (err) => {
+        alert("No se pudo generar el reporte");
+      }
+    })
   }
 
   eliminarProducto(idProducto: any){
@@ -101,7 +121,7 @@ export class CrudCatalogoComponent implements OnInit {
     })
   }
 
-  exportExcel(): void{
+  generarDescargarExcel(): void{
     let element = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();

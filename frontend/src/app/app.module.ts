@@ -35,6 +35,7 @@ import { CrudCatalogoComponent } from './crud-catalogo/crud-catalogo.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { PagoComponent } from './pago/pago.component';
+import { QrCodeComponent } from './qr-code/qr-code.component';
 
 registerLocaleData(en);
 
@@ -56,6 +57,7 @@ registerLocaleData(en);
     CrudCatalogoComponent,
     CarritoComponent,
     PagoComponent,
+    QrCodeComponent,
   ],
   imports: [
     BrowserModule,

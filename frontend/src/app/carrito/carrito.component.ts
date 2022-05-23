@@ -53,7 +53,7 @@ export class CarritoComponent implements OnInit {
     }
     else{
       this.CarritoService.realizarPago();
-      this.route.navigate(['/pago']);
+      this.route.navigate(['/qrpago']);
     }
   }
 

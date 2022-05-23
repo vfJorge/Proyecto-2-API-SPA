@@ -15,7 +15,7 @@
             <td>{{articulo.name}}</td>
             <td>{{articulo.price | number : '1.2-2'}}</td>
             <td>
-              <select  id="cantidad" (mouseover)="obtenerCantidad($any($event.target), $any(articulo))">
+              <select  id="cantidad" (click)="obtenerCantidad($any($event.target), $any(articulo))">
                 <option selected disabled hidden> {{ articulo.qty }}</option>
                 <option *ngFor="let index of cantidadStock(articulo.stockQty); let i = index" [value]="i+1">{{i+1}}</option>
                 </select>

@@ -10,6 +10,7 @@ import { TiendaComponent } from './tienda/tienda.component';
 import { CrudCatalogoComponent } from './crud-catalogo/crud-catalogo.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PagoComponent } from './pago/pago.component';
+import { QrCodeComponent } from './qr-code/qr-code.component';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'crud-catalogo', component:CrudCatalogoComponent},
   {path: 'carrito', component:CarritoComponent},
   {path: 'pago', component:PagoComponent},
+  {path: 'qrpago', component:QrCodeComponent},
   {path: '', redirectTo:'/menu', pathMatch: 'full'}
 ];
 

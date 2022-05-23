@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CarritoService } from '../services/carrito.service';
 
 @Component({
   selector: 'app-pago',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pago.component.css']
 })
 export class PagoComponent implements OnInit {
-
-  constructor() { }
+  compraRealizada: any = JSON.parse(localStorage.getItem('compra'));
+  
+  constructor(private carritoService:CarritoService) { }
 
   ngOnInit(): void {
   }
 
+  obtenerPagoTotal(): number{
+    return this.carritoService.obtenerPrecioTotalPago();
+  }
 }

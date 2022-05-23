@@ -8,24 +8,24 @@
   background-color: rgba(247, 244, 244, 0.945);
   background-blend-mode:color-dodge;
   background-size: cover;
-  height: 120vh;
+  height: 100vh;
   width: auto;
   position: relative;
   text-align: center;
+  padding-top: 5vh;
 }
 
 #inner-div > h2{
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%)
 }
 
-/* #JaimitoMenu{
-  margin-top: 100px;
-  height: 86px;
-  width: 274px;
-} */
+#JaimitoMenu{
+  height: 20vh;
+  margin-top: 3vh;
+}
 
