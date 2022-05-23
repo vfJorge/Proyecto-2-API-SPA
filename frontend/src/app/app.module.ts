@@ -34,6 +34,7 @@ import { FilterCatalogoPipe } from './Pipes/filter-catalogo.pipe';
 import { CrudCatalogoComponent } from './crud-catalogo/crud-catalogo.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { PagoComponent } from './pago/pago.component';
 
 registerLocaleData(en);
 
@@ -54,6 +55,7 @@ registerLocaleData(en);
     FilterCatalogoPipe,
     CrudCatalogoComponent,
     CarritoComponent,
+    PagoComponent,
   ],
   imports: [
     BrowserModule,

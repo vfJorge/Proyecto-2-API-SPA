@@ -19,7 +19,15 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('has logged in', () => {
+    (<HTMLInputElement>document.getElementById('email')).value = "softwareenunclic@gmail.com";
+    (<HTMLInputElement>document.getElementById('password')).value = "123";
+    expect(component.submitForm).toEqual(true);
   });
+
+  it('hasnt logged in', () => {
+    (<HTMLInputElement>document.getElementById('email')).value = "ed_leo1411@gmail.com";
+    (<HTMLInputElement>document.getElementById('password')).value = "ednover123";
+    expect(component.submitForm).toEqual(false);
+  })
 });

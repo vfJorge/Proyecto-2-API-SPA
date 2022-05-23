@@ -15,8 +15,8 @@
           <div class="col-sm-2" *ngFor="let Anime of AnimesRecibidos  | filterManga:filteredString | paginate: { itemsPerPage: 18, currentPage: page }">
               <div class="card">
                 <img src= {{Anime.node.main_picture.medium}}>
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{Anime.node.title}}</h5>
+                <div class="card-body" id="cardInfo">
+                  <h5 class="card-title text-center"><b>{{Anime.ranking.rank}}</b>&nbsp;&nbsp;{{Anime.node.title}}</h5>
                 </div>
             </div>
             <br>

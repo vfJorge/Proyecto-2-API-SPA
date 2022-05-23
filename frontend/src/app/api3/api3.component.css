@@ -9,3 +9,14 @@
   a{
     color: white;
   }
+
+  
+  h5{
+    font-size: 92%;
+  }
+  
+  #cardInfo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }

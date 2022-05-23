@@ -4,6 +4,29 @@ body {
 	font-family: 'Varela Round', sans-serif;
 	font-size: 13px;
 }
+
+#iconoAdicionar {
+	filter:invert(1);
+	width: 20px;
+	padding-bottom: 3px;
+}
+
+#iconoPDF {
+	filter:invert(1);
+	width: 20px;
+	padding-bottom: 3px;
+}
+
+#iconoExcel {
+	filter:invert(1);
+	width: 20px;
+	padding-bottom: 3px;
+}
+
+#excel-table{
+	display: none;
+}
+
 .table-responsive {
     margin: 30px 0;
 }

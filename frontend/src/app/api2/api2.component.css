@@ -1,3 +1,13 @@
 .card{
     min-height: 400px;
   }
+
+  h5 {
+    font-size: 105%;
+  }
+  
+  #cardInfo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }

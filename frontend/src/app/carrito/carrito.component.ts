@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../services/carrito.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
@@ -13,7 +14,7 @@ export class CarritoComponent implements OnInit {
   public cantidadesDeArticulos: any = [];
   public cantidadStock = Array;
 
-  constructor(private CarritoService: CarritoService) { }
+  constructor(private CarritoService: CarritoService, private route:Router) { }
 
   
   ngOnInit(): void {
@@ -47,7 +48,13 @@ export class CarritoComponent implements OnInit {
 
 
   realizarPago() {
-    this.CarritoService.realizarPago();
+    if(localStorage.getItem('bearerToken') == ''){
+      alert("Crea una cuenta para poder realizar el pago")
+    }
+    else{
+      this.CarritoService.realizarPago();
+      this.route.navigate(['/pago']);
+    }
   }
 
 }

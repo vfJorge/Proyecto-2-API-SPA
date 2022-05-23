@@ -23,12 +23,12 @@ export class AppComponent {
 
   ngOnInit(){
     if(this.isLogged != ''){
-      document.getElementById("loginButton").setAttribute("style","visibility: hidden;");
-      document.getElementById("logoutButton").setAttribute("style","visibility: visible");
+      document.getElementById("loginButton").setAttribute("style","display: none");
+      document.getElementById("logoutButton").setAttribute("style","display: block");
     }
     else{
-      document.getElementById("loginButton").setAttribute("style","visibility: visible;");
-      document.getElementById("logoutButton").setAttribute("style","visibility: hidden");
+      document.getElementById("loginButton").setAttribute("style","display: block");
+      document.getElementById("logoutButton").setAttribute("style","display: none");
     }
   }
 

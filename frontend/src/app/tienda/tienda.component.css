@@ -27,10 +27,22 @@ p{
   background-image: linear-gradient(rgb(53, 174, 230),rgb(22, 82, 131));
   border-radius: 5px;
   margin: 0%;
-  padding: 10px;
+  padding: 5px;
   color: white;
+  width: 94%;
 }
 
 #crudButton{
   visibility: hidden;
+}
+
+#cardInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 1px;
+}
+
+h5 {
+  font-size: 105%;
 }

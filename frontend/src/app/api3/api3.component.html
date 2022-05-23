@@ -7,7 +7,7 @@
       <br>
       <div class="row">
         <div class="col-md-12">
-          <input type="text" class="form-control" [(ngModel)]="filteredString"/>
+          <input type="text" placeholder="Buscar (Mangas)" class="form-control" [(ngModel)]="filteredString"/>
         </div>
       </div>
   <br><br>
@@ -15,8 +15,8 @@
           <div class="col-sm-2" *ngFor="let Manga of MangasRecibidos  | filterManga:filteredString | paginate: { itemsPerPage: 18, currentPage: page }">
               <div class="card">
                 <img src= {{Manga.node.main_picture.medium}}>
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{Manga.node.title}}</h5>
+                <div class="card-body" id="cardInfo">
+                  <h5 class="card-title text-center"><b>{{Manga.ranking.rank}}</b>&nbsp;&nbsp;{{Manga.node.title}}</h5>
                 </div>
             </div>
             <br>

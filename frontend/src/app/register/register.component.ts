@@ -34,7 +34,12 @@ export class RegisterComponent implements OnInit {
       this.LoginRegisterService.postCrearCuenta(cuenta).subscribe((resp: any) => {
         if(resp.message == '¡Usuario registrado exitosamente!')
         alert("Te has registrado exitosamente");
+        this.LoginRegisterService.postIniciarSesion(cuenta).subscribe((resp: any) => {
+          this.LoginRegisterService.guardarToken(resp.access_token);
+          window.location.reload();
+        })
       })
+      
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {

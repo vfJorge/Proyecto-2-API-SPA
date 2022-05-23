@@ -13,14 +13,14 @@
         <tbody *ngFor="let articulo of Articulos">
           <tr>
             <td>{{articulo.name}}</td>
-            <td>{{articulo.price}}</td>
+            <td>{{articulo.price | number : '1.2-2'}}</td>
             <td>
-              <select  id="cantidad" (click)="obtenerCantidad($any($event.target), $any(articulo))">
+              <select  id="cantidad" (mouseover)="obtenerCantidad($any($event.target), $any(articulo))">
                 <option selected disabled hidden> {{ articulo.qty }}</option>
                 <option *ngFor="let index of cantidadStock(articulo.stockQty); let i = index" [value]="i+1">{{i+1}}</option>
                 </select>
             </td>
-            <td>{{articulo.price * articulo.qty}}</td>
+            <td>{{articulo.price * articulo.qty | number : '1.2-2'}}</td>
             <td><button class="btn btn-secondary" (click)="eliminarArticuloDelCarro(articulo.id)"><img src="../../assets/trash.png"></button></td>
           </tr>
         </tbody>
@@ -29,14 +29,14 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="subtotal">Subtotal: ${{valorTotalCompra()}}</td>
+            <td class="subtotal">Subtotal: ${{valorTotalCompra()  | number : '1.2-2'}}</td>
           </tr>
           <tr>
             <td></td>
+            <td><button class="btn btn-danger"(click)="vaciarCarro()">Vaciar carrito</button></td>
             <td></td>
+            <td><button class="btn btn-success" (click)="realizarPago()">Realizar compra</button></td>
             <td></td>
-            <td><button class="btn btn-danger" (click)="vaciarCarro()">Vaciar carrito</button></td>
-            <td><button class="btn btn-success" (click)="realizarPago()">Realizar compra </button></td>
           </tr>
         </tfoot>
       </table>
@@ -46,9 +46,6 @@
 
 <ng-container *ngIf="carritoVacio()">
   <div class="container">
-    <div class="card">
-      <h5 class="card-title">Mi carrito de compra</h5>
-    </div>
     <div class="center">
       <h3>Parece ser que tu carrito está vacío...</h3>
     </div>

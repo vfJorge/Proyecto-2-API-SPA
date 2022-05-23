@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         window.location.reload();
       }, error => {
         console.log(error);
-        alert("Contraseña o correo incorrecto, intentalo de nuevo");
+        alert("Credenciales inválidas, intentalo de nuevo");
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {

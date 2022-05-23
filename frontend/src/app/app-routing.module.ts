@@ -9,6 +9,7 @@ import { Api5Component } from './api5/api5.component';
 import { TiendaComponent } from './tienda/tienda.component';
 import { CrudCatalogoComponent } from './crud-catalogo/crud-catalogo.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { PagoComponent } from './pago/pago.component';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'crud-catalogo', component:CrudCatalogoComponent},
   {path: 'carrito', component:CarritoComponent},
+  {path: 'pago', component:PagoComponent},
   {path: '', redirectTo:'/menu', pathMatch: 'full'}
 ];
 
